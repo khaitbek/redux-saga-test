@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { BASE_URL } from "../../lib";
 import { Comment, Post } from "../../types";
 import { Accordion, Button, Collapse, ListGroup, ListGroupItem } from "react-bootstrap";
 import { useState } from "react";
@@ -10,7 +9,7 @@ export function Comments({ postId }: { postId: Post["id"] }) {
   const { data: comments } = useQuery<Comment[]>({
     queryKey: ["comments", postId],
     queryFn: async () => {
-      return (await axios.get(BASE_URL + "/comments?postId=" + String(postId))).data
+      return (await axios.get(import.meta.env.VITE_BASE_URL + "/comments?postId=" + String(postId))).data
     }
   });
 

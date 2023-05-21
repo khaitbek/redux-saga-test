@@ -1,7 +1,6 @@
 import axios from "axios"
 import { useQuery } from "@tanstack/react-query"
 import { Post, User } from "../../types"
-import { BASE_URL } from "../../lib"
 import { Button, Card, Col, Container, ListGroup, ListGroupItem, Row } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { PageLoader } from "../../components/Loader/Loader";
@@ -12,13 +11,13 @@ export default function Profile() {
   const { data: user, isLoading } = useQuery<User>({
     queryKey: ["user", id],
     queryFn: async () => {
-      return (await axios.get(BASE_URL + "/users?id=" + String(id))).data[0];
+      return (await axios.get(import.meta.env.VITE_BASE_URL + "/users?id=" + String(id))).data[0];
     }
   });
   const { data: userPosts } = useQuery<Post[]>({
     queryKey: ["posts", id],
     queryFn: async () => {
-      return (await axios.get(BASE_URL + "/posts?userId=" + id)).data;
+      return (await axios.get(import.meta.env.VITE_BASE_URL + "/posts?userId=" + id)).data;
     }
   });
   if (isLoading || !user) return <PageLoader />

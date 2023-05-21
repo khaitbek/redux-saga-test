@@ -1,9 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { put, takeEvery } from "redux-saga/effects";
+import { getPosts } from "../lib/api";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import type { Post } from "../types";
-import { getPosts } from "../lib/api";
-import createSagaMiddleware from "redux-saga";
 
 
 export interface PostState {
